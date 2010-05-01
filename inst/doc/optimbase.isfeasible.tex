@@ -1,0 +1,51 @@
+\inputencoding{utf8}
+\HeaderA{optimbase.isfeasible}{Check Point Estimate}{optimbase.isfeasible}
+\keyword{method}{optimbase.isfeasible}
+%
+\begin{Description}\relax
+This function checks that the point estimate is consistent with the bounds
+and the non linear inequality constraints. It is usually called by  
+\code{optimbase.checkx0} to check initial guesses.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+  optimbase.isfeasible(this = NULL, x = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{this}] An optimization object.
+\item[\code{x}] The point estimate, i.e. a column vector of numerical values.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+Returns 1 if the given point satisfies bounds constraints and inequality
+constraints.
+
+Returns 0 if the given point is not in the bounds.
+
+Returns -1 if the given point does not satisfies inequality constraints.
+\end{Details}
+%
+\begin{Value}
+Return a list with the following elements: \begin{description}
+
+\item[this] The optimization object.
+\item[isfeasible] The feasibility flag, either -1, 0 or 1.
+
+\end{description}
+
+\end{Value}
+%
+\begin{Author}\relax
+Author of Scilab optimbase module: Michael Baudin (INRIA - Digiteo)
+
+Author of R adaptation: Sebastien Bihorel (\email{sb.pmlab@gmail.com})
+\end{Author}
+%
+\begin{SeeAlso}\relax
+\code{\LinkA{optimbase.checkx0}{optimbase.checkx0}}
+\end{SeeAlso}

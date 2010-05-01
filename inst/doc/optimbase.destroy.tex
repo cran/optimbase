@@ -1,0 +1,40 @@
+\inputencoding{utf8}
+\HeaderA{optimbase.destroy}{Erase an optimization history.}{optimbase.destroy}
+\keyword{method}{optimbase.destroy}
+%
+\begin{Description}\relax
+Erase the optimization history in an optimization object.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+  optimbase.destroy(this = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{this}] An optimization object.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+This function erases the content of the \code{historyfopt} and
+\code{historyxopt} elements in \code{this} and call the 
+\code{optimbase.logshutdown} function if the \code{logstartup} element in
+\code{this} is set to TRUE.
+\end{Details}
+%
+\begin{Value}
+Return an updated optimization object.
+\end{Value}
+%
+\begin{Author}\relax
+Author of Scilab optimbase module: Michael Baudin (INRIA - Digiteo)
+
+Author of R adaptation: Sebastien Bihorel (\email{sb.pmlab@gmail.com})
+\end{Author}
+%
+\begin{SeeAlso}\relax
+\code{\LinkA{optimbase.logshutdown}{optimbase.logshutdown}}
+\end{SeeAlso}

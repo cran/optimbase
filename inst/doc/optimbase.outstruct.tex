@@ -1,0 +1,43 @@
+\inputencoding{utf8}
+\HeaderA{optimbase.outstruct}{Create Basic Optimization Data Object}{optimbase.outstruct}
+\keyword{method}{optimbase.outstruct}
+%
+\begin{Description}\relax
+This function creates a basic optimization data object by extracting the
+content of specific fields of an optimization object.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+  optimbase.outstruct(this = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{this}] An optimization object.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Return a list with a 'type' attribute set to 'T\_OPTDATA' and with the
+following elements: \begin{description}
+
+\item[x] The current optimum point estimate (extracted from
+\code{this\$xopt}).
+\item[fval] The value of the cost function at the current optimum point
+estimate (extracted from \code{this\$fopt}).
+\item[iteration] The current number of iteration (extracted
+from \code{this\$iterations}).
+\item[funccount] The current number of function evaluations (extracted from
+\code{this\$funevals}).
+
+\end{description}
+
+\end{Value}
+%
+\begin{Author}\relax
+Author of Scilab optimbase module: Michael Baudin (INRIA - Digiteo)
+
+Author of R adaptation: Sebastien Bihorel (\email{sb.pmlab@gmail.com})
+\end{Author}

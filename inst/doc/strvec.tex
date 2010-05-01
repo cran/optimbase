@@ -1,0 +1,36 @@
+\inputencoding{utf8}
+\HeaderA{strvec}{Auto-collapse of Vectors}{strvec}
+\keyword{method}{strvec}
+%
+\begin{Description}\relax
+\code{strvec} is a utility function which collapses all elements of a vector
+into a character scalar.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+  strvec(x = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] A string of characters.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A character scalar consisting of all the elements of \code{x} separated by a
+single white space.
+\end{Value}
+%
+\begin{Author}\relax
+Sebastien Bihorel (\email{sb.pmlab@gmail.com})
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+  strvec(letters[1:10])
+  strvec(1:10)
+\end{ExampleCode}
+\end{Examples}

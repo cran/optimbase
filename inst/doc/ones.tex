@@ -1,0 +1,46 @@
+\inputencoding{utf8}
+\HeaderA{zeros \& ones}{Matrix of zeros or ones.}{zeros .Ramp. ones}
+\aliasA{ones}{zeros \& ones}{ones}
+\aliasA{zeros}{zeros \& ones}{zeros}
+\keyword{method}{zeros \& ones}
+%
+\begin{Description}\relax
+Creates a matrix of zeros or ones.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+  zeros(nx = 1, ny = nx)
+  ones(nx = 1, ny = nx)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{nx}] The number of rows. Default is 1.
+\item[\code{ny}] The number of columns. Default is \code{nx}.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+\code{zeros} and \code{ones} create full matrices of zeros and ones. If the
+user only provides an input for \code{nx}, the produced matrices are nx x nx
+square matrices.
+\end{Details}
+%
+\begin{Value}
+Return of nx x ny matrix of zeros of ones.
+\end{Value}
+%
+\begin{Author}\relax
+Sebastien Bihorel (\email{sb.pmlab@gmail.com})
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+  zeros()
+  zeros(3)
+  ones(4,5)
+  ## Not run: ones('3','3')
+\end{ExampleCode}
+\end{Examples}

@@ -1,0 +1,32 @@
+\inputencoding{utf8}
+\HeaderA{vec2matrix}{Vector to Matrix Conversion}{vec2matrix}
+\keyword{method}{vec2matrix}
+%
+\begin{Description}\relax
+This function converts a vector into a row matrix.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+  vec2matrix(object = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{object}] A vector or a matrix.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+If \code{object} is already a matrix, \code{object} is not modified. If
+\code{object} is not a matrix or a vector, the algorithm is stopped.
+\end{Details}
+%
+\begin{Value}
+Return a row matrix.
+\end{Value}
+%
+\begin{Author}\relax
+Sebastien Bihorel (\email{sb.pmlab@gmail.com})
+\end{Author}

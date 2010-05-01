@@ -1,0 +1,43 @@
+\inputencoding{utf8}
+\HeaderA{Bound and constraint checks}{Point Estimate Comparison with Bounds and Constraints}{Bound and constraint checks}
+\aliasA{optimbase.isinbounds}{Bound and constraint checks}{optimbase.isinbounds}
+\aliasA{optimbase.isinnonlincons}{Bound and constraint checks}{optimbase.isinnonlincons}
+\keyword{method}{Bound and constraint checks}
+%
+\begin{Description}\relax
+\code{optimbase.isinbounds} checks that given parameter estimates are within
+the defined minimum and maximum boundaries, while
+\code{optimbase.isinnonlincons} checks that the given point estimate satisfies
+the defined nonlinear constraints.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+  optimbase.isinbounds(this = NULL, x = NULL)
+  optimbase.isinnonlincons(this=NULL,x=NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{this}] An optimization object.
+\item[\code{x}] A column vector of parameter estimates.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Both functions return a list with the following elements: \begin{description}
+
+\item[this] The optimization object.
+\item[isfeasible] TRUE if the parameter estimates satisfy the constraints,
+FALSE otherwise.
+
+\end{description}
+
+\end{Value}
+%
+\begin{Author}\relax
+Author of Scilab optimbase module: Michael Baudin (INRIA - Digiteo)
+
+Author of R adaptation: Sebastien Bihorel (\email{sb.pmlab@gmail.com})
+\end{Author}

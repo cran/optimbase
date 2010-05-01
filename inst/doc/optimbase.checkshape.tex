@@ -1,0 +1,42 @@
+\inputencoding{utf8}
+\HeaderA{optimbase.checkshape}{Check the Dimensions of the Cost Function Output}{optimbase.checkshape}
+\keyword{method}{optimbase.checkshape}
+%
+\begin{Description}\relax
+This function is called by \code{optimbase.checkcostfun} to check whether the
+dimensions of a cost function output match the expectations.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+  optimbase.checkshape(this = NULL, varname = NULL, data = NULL, index = NULL,
+                       expectednrows = NULL, expectedncols = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{this}] An optimization object.
+\item[\code{varname}] The name of the output being checked, either 'f', 'c', or 'g'.
+\item[\code{data}] A content of the output.
+\item[\code{index}] The index (see \code{vignette('optimbase',package='optimbase')}
+for more details).
+\item[\code{expectednrows}] Number of expected rows.
+\item[\code{expectedncols}] Number of expected columns.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Return the optimization object or an error message if the dimensions are
+inconsistent.
+\end{Value}
+%
+\begin{Author}\relax
+Author of Scilab optimbase module: Michael Baudin (INRIA - Digiteo)
+
+Author of R adaptation: Sebastien Bihorel (\email{sb.pmlab@gmail.com})
+\end{Author}
+%
+\begin{SeeAlso}\relax
+\code{\LinkA{optimbase.checkcostfun}{optimbase.checkcostfun}}
+\end{SeeAlso}

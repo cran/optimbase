@@ -1,0 +1,50 @@
+\inputencoding{utf8}
+\HeaderA{optimbase.terminate}{Evaluation of Termation Status}{optimbase.terminate}
+\keyword{method}{optimbase.terminate}
+%
+\begin{Description}\relax
+This function determines whether the optimization must continue or terminate.
+If the \code{verbosetermination} element of the optimization object is
+enabled, messages are printed detailing the termination intermediate steps.
+The \code{optimbase.terminate} function takes into account the number of
+iterations, the number of evaluations of the cost function, the tolerance on x
+and the tolerance on f. See the section "Termination" in
+\code{vignette('optimbase',package='optimbase')} for more details.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+  optimbase.terminate(this = NULL, previousfopt = NULL, currentfopt = NULL,
+                      previousxopt = NULL, currentxopt = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{this}] An optimization object.
+\item[\code{previousfopt}] The previous value of the objective function.
+\item[\code{currentfopt}] The current value of the objective function.
+\item[\code{previousxopt}] The previous value of the parameter estimate matrix.
+\item[\code{currentxopt}] The current value of the parameter estimate matrix.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Return a list with the following elements: \begin{description}
+
+\item[this] The updated optimization object.
+\item[terminate] TRUE if the algorithm terminates, FALSE if the algorithm
+must continue.
+\item[status] The termination status could be 'maxiter', 'maxfuneval',
+'tolf' or 'tolx' if \code{terminate} is set to TRUE, 'continue'
+otherwise.
+
+\end{description}
+
+\end{Value}
+%
+\begin{Author}\relax
+Author of Scilab optimbase module: Michael Baudin (INRIA - Digiteo)
+
+Author of R adaptation: Sebastien Bihorel (\email{sb.pmlab@gmail.com})
+\end{Author}

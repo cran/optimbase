@@ -1,0 +1,55 @@
+\inputencoding{utf8}
+\HeaderA{asserts}{Check of Variable Class}{asserts}
+\aliasA{assert.typeboolean}{asserts}{assert.typeboolean}
+\aliasA{assert.typefunction}{asserts}{assert.typefunction}
+\aliasA{assert.typereal}{asserts}{assert.typereal}
+\aliasA{assert.typestring}{asserts}{assert.typestring}
+\aliasA{unknownValueForOption}{asserts}{unknownValueForOption}
+\keyword{method}{asserts}
+%
+\begin{Description}\relax
+Utility functions in \pkg{optimbase} meant to check variable class. Stop the
+algorithm if the  variable is not of the expected class.\begin{description}
+
+\item[\code{assert.typeboolean}] for logical variables
+\item[\code{assert.typefunction}] for functions
+\item[\code{assert.typereal}] for numeric variables
+\item[\code{assert.typestring}] for character variables
+
+\end{description}
+
+\code{unknownValueForOption} stops the algorithm and returns an error
+message, when some checks in \code{optimbase} are not successful.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+  assert.typeboolean(var = NULL, varname = NULL, ivar = NULL)
+  assert.typefunction(var = NULL, varname = NULL, ivar = NULL)
+  assert.typereal(var = NULL, varname = NULL, ivar = NULL)
+  assert.typestring(var = NULL, varname = NULL, ivar = NULL)
+  unknownValueForOption(value = NULL, optionname = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{var}] The variable name.
+\item[\code{varname}] The name of a variable to which \code{var} should have been
+assigned to.
+\item[\code{ivar}] A integer, meant to provide additional info on \code{varname} in
+the error message.
+\item[\code{value}] A numeric or a string.
+\item[\code{optionname}] The name of a variable for which \code{value} is unknown.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Return an error message through the \code{stop} function.
+\end{Value}
+%
+\begin{Author}\relax
+Author of Scilab optimbase module: Michael Baudin (INRIA - Digiteo)
+
+Author of R adaptation: Sebastien Bihorel (\email{sb.pmlab@gmail.com})
+\end{Author}

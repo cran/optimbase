@@ -1,0 +1,39 @@
+\inputencoding{utf8}
+\HeaderA{optimbase.checkbounds}{Check bounds.}{optimbase.checkbounds}
+\keyword{method}{optimbase.checkbounds}
+%
+\begin{Description}\relax
+This function checks if the bounds defined in the optimization object are
+consistent (same number of minimal and maximal bounds as the number of
+variables, minimal bounds lower than maximal bounds) and puts an error
+message in the returned object if not.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+  optimbase.checkbounds(this = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{this}] An optimization object.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Return a list with the following list: \begin{description}
+
+\item[this] The optimization object.
+\item[isok] TRUE if the bounds are consistent, FALSE otherwise.
+\item[errmsg] An error message if the bounds are not consistent.
+
+\end{description}
+
+\end{Value}
+%
+\begin{Author}\relax
+Author of Scilab optimbase module: Michael Baudin (INRIA - Digiteo)
+
+Author of R adaptation: Sebastien Bihorel (\email{sb.pmlab@gmail.com})
+\end{Author}
