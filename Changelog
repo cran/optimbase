@@ -1,0 +1,4 @@
+2010/05/11 Sebastien Bihorel <sb.pmlab@gmail.com>
+
+  * DESCRIPTION: added dependency to the Matrix package (needed for the norm()
+    function)
