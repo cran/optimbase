@@ -13,23 +13,23 @@
 
 optimbase.isinnonlincons <- function(this=NULL,x=NULL){
 
-  isfeasible = TRUE
+  isfeasible <- TRUE
   if (this$nbineqconst > 0){
     if (this$withderivatives){
       tmp <- optimbase.function(this=this,x=x,index=2)
         this <- tmp$this
-        f <- this$f
-        g <- this$g
-        c <- this$c
-        gc <- this$gc
-        index <- this$index
+        f <- tmp$f
+        g <- tmp$g
+        c <- tmp$c
+        gc <- tmp$gc
+        index <- tmp$index
       rm(tmp)
     } else {
       tmp <- optimbase.function(this=this,x=x,index=5)
         this <- tmp$this
-        f <- this$f
-        c <- this$c
-        index <- this$index
+        f <- tmp$f
+        c <- tmp$c
+        index <- tmp$index
       rm(tmp)
     }
     for (ic in 1:this$nbineqconst){

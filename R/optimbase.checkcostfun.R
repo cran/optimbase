@@ -21,7 +21,7 @@ optimbase.checkcostfun <- function(this=NULL){
   # If there are nonlinear constraints and no derivatives, check that the index is correctly managed.
   #
   if ((this$nbineqconst>0) & (!this$withderivatives)){
-    cmd <- paste('tmp <- optimbase.function(this=this,x0=this$x0,index=index)',
+    cmd <- paste('tmp <- optimbase.function(this=this,x=this$x0,index=index)',
                  '  this <- tmp$this',
                  '  f <- tmp$f',
                  '  c <- tmp$c',
@@ -67,7 +67,7 @@ optimbase.checkcostfun <- function(this=NULL){
   # If there are no nonlinear constraints and no derivatives, check that the index is correctly managed.
   #
   if ((this$nbineqconst==0) & (!this$withderivatives)){
-    cmd <- paste('tmp <- optimbase.function(this,this$x0,index)',
+    cmd <- paste('tmp <- optimbase.function(this=this,x=this$x0,index=index)',
                  '  this <- tmp$this',
                  '  f <- tmp$f',
                  '  index <- tmp$index',
@@ -92,7 +92,7 @@ optimbase.checkcostfun <- function(this=NULL){
   # If there are no nonlinear constraints and derivatives, check that the index is correctly managed.
   #
   if ((this$nbineqconst==0) & (this$withderivatives)){
-    cmd <- paste('tmp <- optimbase.function(this,this$x0,index)',
+    cmd <- paste('tmp <- optimbase.function(this=this,x=this$x0,index=index)',
                  '  this <- tmp$this',
                  '  f <- tmp$f',
                  '  g <- tmp$g',

@@ -1,3 +1,10 @@
+2010/05/18 Sebastien Bihorel <sb.pmlab@gmail.com>
+
+  * optimbase.checkcostfun: corrected bugs in the calls to optimbase.function
+    (wrong arguments were set up)
+  * optimbase.isinnonlincons: corrected the f, g, c and gc assignments to use
+    tmp instead of this.
+
 2010/05/11 Sebastien Bihorel <sb.pmlab@gmail.com>
 
   * DESCRIPTION: added dependency to the Matrix package (needed for the norm()
