@@ -13,7 +13,7 @@
 
 optimbase.outputcmd <- function(this=NULL,state=NULL,data=NULL){
   if (!is.null(this$outputcommand)){
-    if (optimtypeof(this$outputcommandarg)!='T_FMINSEARCH'){
+    if (optimtypeof(this$outputcommandarg)!='T_FARGS'){
       this$outputcommand(state=state,data=data)
     }else{
       this$outputcommand(state=state,data=data,fmsdata=this$outputcommandarg)

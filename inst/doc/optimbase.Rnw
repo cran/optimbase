@@ -26,7 +26,7 @@
 \newcommand{\optimbase}{\pkg{optimbase}}
 
 \title{The optimbase Package}
-\author{SÃ©bastien Bihorel}
+\author{Sébastien Bihorel}
 
 \begin{document}
 \maketitle
@@ -125,7 +125,7 @@ The cost function is typically evaluated at the current point estimate \code{x}
 by using the following call: \code{optimbase.function(this, x, index)}.
 
 If the 'type' attribute of \code{this\$costfargument} is \textbf{not}
-'T\_FMINSEARCH', the cost function is called within the
+'T\_FARGS', the cost function is called within the
 \code{optimbase.function} as \code{this\$fun(x=x,index=index)} and returns non
 NULL elements for:
 \begin{itemize}
@@ -141,7 +141,7 @@ NULL elements for:
     are nonlinear constraints).}
 \end{itemize}
   
-If the 'type' attribute of \code{this\$costfargument} is 'T\_FMINSEARCH',
+If the 'type' attribute of \code{this\$costfargument} is 'T\_FARGS',
 the cost function is called within the \code{optimbase.function} as
 \code{this\$fun(x=x,index=index,fmsfundata=this\$costfargument)} and returns non
 NULL elements for:
@@ -270,6 +270,7 @@ map given in the \pkg{neldermead} package.
 \input{optimbase.destroy}
 \input{optimbase.function}
 \input{optimbase.get}
+\input{optimbase.gridsearch}
 \input{optimbase.hasbounds}
 \input{optimbase.incriter}
 \input{optimbase.isfeasible}

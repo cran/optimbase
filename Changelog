@@ -1,3 +1,11 @@
+2010/10/15 Sebastien Bihorel <sb.pmlab@gmail.com>
+
+  * added optimbase.gridsearch function
+  * optimbase.function: modified tests for T_FMINSEARCH into tests for T-FARGS
+    because passing argument to a cost function should not have been restricted
+    to the specific fminsearch algorithm
+  * optimbase.outputcmd: modified test for T_FMINSEARCH into test for T-FARGS 
+
 2010/05/18 Sebastien Bihorel <sb.pmlab@gmail.com>
 
   * optimbase.checkcostfun: corrected bugs in the calls to optimbase.function

@@ -35,7 +35,7 @@ optimbase.function <- function(this=NULL,x=NULL,index=NULL){
 
   if (this$withderivatives){
     if (this$nbineqconst==0){
-      if (optimtypeof(this$costfargument)!='T_FMINSEARCH'){
+      if (optimtypeof(this$costfargument)!='T_FARGS'){
         tmp <- this$fun(x=x,index=index)
           varargout$f <- tmp$f
           varargout$g <- tmp$g
@@ -50,7 +50,7 @@ optimbase.function <- function(this=NULL,x=NULL,index=NULL){
         rm(tmp)
       }
     } else {
-      if (optimtypeof(this$costfargument)!='T_FMINSEARCH'){
+      if (optimtypeof(this$costfargument)!='T_FARGS'){
         tmp <- this$fun(x=x,index=index)
           varargout$f <- tmp$f
           varargout$g <- tmp$g
@@ -71,7 +71,7 @@ optimbase.function <- function(this=NULL,x=NULL,index=NULL){
     }
   } else {
     if (this$nbineqconst==0){
-      if (optimtypeof(this$costfargument)!='T_FMINSEARCH'){
+      if (optimtypeof(this$costfargument)!='T_FARGS'){
         tmp <- this$fun(x=x,index=index)
           varargout$f <- tmp$f
           varargout$index <- tmp$index
@@ -84,7 +84,7 @@ optimbase.function <- function(this=NULL,x=NULL,index=NULL){
         rm(tmp)
       }
     } else {
-      if (optimtypeof(this$costfargument)!='T_FMINSEARCH'){
+      if (optimtypeof(this$costfargument)!='T_FARGS'){
         tmp <- this$fun(x,index)
           varargout$f <- tmp$f
           varargout$c <- tmp$c
