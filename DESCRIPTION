@@ -1,8 +1,8 @@
 Package: optimbase
 Type: Package
 Title: R port of the Scilab optimbase module
-Version: 1.0-4
-Date: 2010-08-08
+Version: 1.0-5
+Date: 2011-01-15
 Author: Sebastien Bihorel, Michael Baudin (author of the original
         module)
 Maintainer: Sebastien Bihorel <sb.pmlab@gmail.com>
@@ -16,6 +16,6 @@ Description: Provides a set of commands to manage an abstract
 Depends: Matrix
 License: CeCILL-2
 LazyLoad: yes
-Packaged: 2010-09-16 02:48:30 UTC; root
+Packaged: 2011-01-16 02:42:31 UTC; sebastien
 Repository: CRAN
-Date/Publication: 2010-09-16 06:37:26
+Date/Publication: 2011-01-16 09:37:13

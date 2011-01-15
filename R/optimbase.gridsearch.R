@@ -1,4 +1,4 @@
-# Copyright (C) 2010 - Sebastien Bihorel
+# Copyright (C) 2010-2011 - Sebastien Bihorel
 #
 # This file must be used under the terms of the CeCILL.
 # This source file is licensed as described in the file COPYING, which
@@ -56,10 +56,10 @@ optimbase.gridsearch <- function(fun=NULL,x0=NULL,xmin=NULL,xmax=NULL,
   # Determine if alpha is to be used
   if (is.null(xmin) | is.null(xmax)){  
     # Check alpha
-    if (!is.numeric(alpha)){
+    if (any(!is.numeric(alpha))){
       stop('optimbase.gridsearch: alpha is not numeric.', call.=FALSE)
-    } else if (alpha<=0){
-      stop('optimbase.gridsearch: alpha is not positive.', call.=FALSE)
+    } else if (any(alpha<=1)){
+      stop('optimbase.gridsearch: alpha contains value(s) below 1.', call.=FALSE)
     }
     if (length(alpha)>length(x0)){
       alpha <- alpha[1:length(x0)]
@@ -81,13 +81,23 @@ optimbase.gridsearch <- function(fun=NULL,x0=NULL,xmin=NULL,xmax=NULL,
   xgrid <- unique(xgrid)
   
   # Compute f at all vector of xgrid
-  fgrid <- apply(xgrid, 1,
-      function(x,...) optimbase.function(this=opt,x=x,index=2)$f,
-      opt)
+  cat(sprintf('The grid contains %d unique combinations.\n',size(xgrid,1)))
+  xgrid <- cbind(1:size(xgrid,1),xgrid)
   
+  fgrid <- apply(xgrid, 1,
+      function(x,...) {
+        cat(sprintf('  Evaluating combination number: %d/%d\n',
+                    x[1],size(xgrid,1)))
+        x <- x[-1]
+        optimbase.function(this=opt,x=cbind(x),index=2)$f
+      },
+      opt,xgrid)
+  
+  xgrid <- xgrid[,-1]
+    
   feasible <- apply(xgrid, 1,
       function(x,...){
-        optimbase.isfeasible(this=opt,x=x)$isfeasible},
+        optimbase.isfeasible(this=opt,x=cbind(x))$isfeasible},
       opt)
   
   grid <- data.frame(xgrid, f=fgrid, feasible=feasible)

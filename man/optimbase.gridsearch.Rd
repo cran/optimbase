@@ -19,8 +19,8 @@
   \item{xmax}{Optional: a vector of upper bounds.}
   \item{npts}{A integer scalar greater than 2, indicating the number of 
     evaluation points will be used on each dimension to build the search grid.}
-  \item{alpha}{A vector of positive numbers, which give the factor(s) used to 
-    calculate the evaluation range of each dimension of the search grid (see 
+  \item{alpha}{A vector of numbers greater than 1, which give the factor(s) used 
+    to calculate the evaluation range of each dimension of the search grid (see 
     Details). If \code{alpha} length is lower than that of \code{x0}, elements 
     of \code{alpha} are recycled. If its length is higher than that of 
     \code{x0}, \code{alpha} is truncated.}
@@ -46,4 +46,40 @@
 \seealso{
   \code{\link[optimbase]{optimbase.isfeasible}}
 }
+\examples{
+
+# Problem: find x and y that maximize 3.6*x - 0.4*x^2 + 1.6*y - 0.2*y^2 and
+#          satisfy the constrains:
+#            2*x - y <= 10
+#            x >= 0
+#            y >= 0
+#
+
+gridfun <- function(x=NULL,index=NULL,fmsfundata=NULL,...){
+
+  f <- c()
+  c <- c()
+  if (index == 2 | index == 6)
+    f <- -(3.6*x[1] - 0.4*x[1]*x[1] + 1.6*x[2] - 0.2*x[2]*x[2])
+  if (index == 5 | index == 6)
+    c <- c(10 - 2*x[1] - x[2],
+           x[1],
+           x[2])
+  varargout <- list(f = f, g = c(), c = c, gc = c(), index = index,
+                    this = list(costfargument = fmsfundata))
+
+  return(varargout)
+}
+
+
+x0 <- c(0.35,0.3)
+npts <- 6
+alpha <- 10
+
+optimbase.gridsearch(fun=gridfun,x0=x0,xmin=NULL,xmax=NULL,
+                     npts=npts,alpha=alpha)
+
+# 3.5 and 3 is the actual solution of the optimization problem
+}
+
 \keyword{ method }

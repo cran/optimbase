@@ -25,7 +25,7 @@
 % Defines some custom commands
 \newcommand{\optimbase}{\pkg{optimbase}}
 
-\title{The optimbase Package}
+\title{The optimbase Package - version 1.0-5}
 \author{Sébastien Bihorel}
 
 \begin{document}
@@ -65,7 +65,7 @@ The optimization problem to solve is the following:\\\\
   \begin{array}{l l}
     min f(x)\\
     l_i \le{} x_i \le{} h_i, & i = 1,n \\
-    g_i(x) \le{} 0, & i = 1,nbineq \\\\
+    g_i(x) \ge{} 0, & i = 1,nbineq \\\\
   \end{array}
 \end{math}
  

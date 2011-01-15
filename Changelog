@@ -1,3 +1,11 @@
+2011/01/09 Sebastien Bihorel <sb.pmlab@gmail.com>
+  
+  * optimbase.gridsearch: corrected bug with alpha. Must contain values greater
+  than 1.
+  * vignette: correction of a typo in the description of the optimization
+  problem section 1.1: gi(x) must be greater or equal to 0, and not lower or 
+  equal to 0.
+  
 2010/10/15 Sebastien Bihorel <sb.pmlab@gmail.com>
 
   * added optimbase.gridsearch function
