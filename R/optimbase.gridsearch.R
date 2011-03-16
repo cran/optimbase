@@ -70,16 +70,33 @@ optimbase.gridsearch <- function(fun=NULL,x0=NULL,xmin=NULL,xmax=NULL,
   } else {
     gridlim <- cbind(xmin,xmax)
   }
-  xgrid <- apply(gridlim, 1,
+  
+  # Create grid
+    # Create base grid
+    xgrid <- apply(gridlim, 1,
       function(x,...) seq(x[1],x[2],length.out=(npts-1)),
       npts)
-  xgrid <- data.frame(rbind(xgrid, transpose(x0)))
-  xgrid <- do.call(expand.grid, xgrid)
-  names(xgrid) <- paste('x', 1:length(x0), sep='')
-  
-  # Remove duplicates
-  xgrid <- unique(xgrid)
-  
+    xgrid <- rbind(xgrid, transpose(x0))
+    
+    # Identify which columns do not need to be expanded
+    iscolfix <- apply(xgrid,2,function(x) all(x[1]==x))
+    fixedcols <- which(iscolfix)
+    varcols <- which(!iscolfix)
+    
+    fixedvals <- xgrid[1,iscolfix]
+    xgrid <- data.frame(xgrid[,varcols])
+    
+    # Expand xgrid
+    xgrid <- do.call(expand.grid, xgrid)
+    fixedgrid <- matrix(rep(fixedvals,each=dim(xgrid)[1]),
+                        nrow=dim(xgrid)[1])
+    xgrid <- cbind(xgrid,fixedgrid)
+    xgrid <- xgrid[,order(c(varcols,fixedcols))]
+    names(xgrid) <- paste('x', 1:length(x0), sep='')
+    
+    # Remove duplicates
+    xgrid <- unique(xgrid)
+    
   # Compute f at all vector of xgrid
   cat(sprintf('The grid contains %d unique combinations.\n',size(xgrid,1)))
   xgrid <- cbind(1:size(xgrid,1),xgrid)

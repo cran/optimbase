@@ -25,7 +25,7 @@
 % Defines some custom commands
 \newcommand{\optimbase}{\pkg{optimbase}}
 
-\title{The optimbase Package - version 1.0-5}
+\title{The optimbase Package - version 1.0-6}
 \author{Sébastien Bihorel}
 
 \begin{document}
