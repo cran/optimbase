@@ -11,21 +11,21 @@
 # This source code is a R port of the optimbase component
 # originally written by Michael Baudin for Scilab.
 
-vec2matrix <- function(object=NULL){
-
-  if (is.null(object))
-    stop('vec2matrix: input is not a matrix or a vector.',
+assert.classstring <- function(var=NULL,varname=NULL,ivar=NULL){
+  if (is.null(var))
+    stop('assert.classstring: no input specified, the variable cannot be checked.',
          call.=FALSE)
-  if (!is.matrix(object)){
-    if (is.vector(object)){
-      mat <- matrix(object,ncol=length(object),byrow=TRUE)
+  # Generates an error if the given variable is not of type string
+  if (!is.character(var)){
+    if (is.null(varname) | is.null(ivar)){
+      stop(sprintf('assert.classstring: Expected real variable but got %s instead',
+                   class(var)),
+           call.=FALSE)
     } else {
-      stop('vec2matrix: input is not a matrix or a vector.',
+      stop(sprintf('assert.classstring: Expected character variable for variable %s at input #%d, but got %s instead.',
+                   varname,ivar,class(var)),
            call.=FALSE)
     }
-  } else {
-    mat <- object
   }
-  return(mat)
 }
 

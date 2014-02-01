@@ -1,6 +1,6 @@
 # Copyright (C) 2008-2009 - INRIA - Michael Baudin
 # Copyright (C) 2009-2010 - DIGITEO - Michael Baudin
-# Copyright (C) 2010-2011 - Sebastien Bihorel
+# Copyright (C) 2010-2014 - Sebastien Bihorel
 #
 # This file must be used under the terms of the CeCILL.
 # This source file is licensed as described in the file COPYING, which
@@ -26,11 +26,11 @@ optimbase.configure <- function(this=NULL,
   }
 
   if (key=='-verbose') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classboolean(var=value,varname='value',ivar=3)
     this$verbose <- value
   }
   if (key=='-verbosetermination') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classboolean(var=value,varname='value',ivar=3)
     this$verbosetermination <- value
   }
   if (key=='-logfile') {
@@ -39,7 +39,7 @@ optimbase.configure <- function(this=NULL,
     this <- optimbase.logstartup(this=this)
   }
   if (key=='-x0') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classreal(var=value,varname='value',ivar=3)
     if (size(value,2)!=1)
       stop(sprintf('optimbase.configure: The x0 vector is expected to be a column matrix, but current shape is %d x %d.',
                  size(value,1),size(value,2)),
@@ -47,31 +47,31 @@ optimbase.configure <- function(this=NULL,
     this$x0 <- value
   }
   if (key=='-maxfunevals') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classreal(var=value,varname='value',ivar=3)
     this$maxfunevals <- value
   }
   if (key=='-maxiter') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classreal(var=value,varname='value',ivar=3)
     this$maxiter <- value
   }
   if (key=='-tolfunabsolute') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classreal(var=value,varname='value',ivar=3)
     this$tolfunabsolute <- value
   }
   if (key=='-tolfunrelative') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classreal(var=value,varname='value',ivar=3)
     this$tolfunrelative <- value
   }
   if (key=='-tolxabsolute') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classreal(var=value,varname='value',ivar=3)
     this$tolxabsolute <- value
   }
   if (key=='-tolxrelative') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classreal(var=value,varname='value',ivar=3)
     this$tolxrelative <- value
   }
   if (key=='-tolxmethod') {
-    assert.typeboolean(var=value,varname='value',ivar=3)
+    assert.classboolean(var=value,varname='value',ivar=3)
     if(!is.logical(value)){
       unknownValueForOption(value=value,optionname='-tolxmethod')
     } else {
@@ -79,7 +79,7 @@ optimbase.configure <- function(this=NULL,
     }
   }
   if (key=='-tolfunmethod') {
-    assert.typeboolean(var=value,varname='value',ivar=3)
+    assert.classboolean(var=value,varname='value',ivar=3)
     if(!is.logical(value)){
       unknownValueForOption(value=value,optionname='-tolfunmethod')
     } else {
@@ -87,41 +87,51 @@ optimbase.configure <- function(this=NULL,
     }
   }
   if (key=='-function') {
-    assert.typefunction(var=value,varname='value',ivar=3)
+    assert.classfunction(var=value,varname='value',ivar=3)
     this$fun <- value
   }
   if (key=='-outputcommand') {
-    assert.typefunction(var=value,varname='value',ivar=3)
+    assert.classfunction(var=value,varname='value',ivar=3)
     this$outputcommand <- value
   }
   if (key=='-outputcommandarg') {
-    this$outputcommandarg <- value
+    if (!is(value)=='optimbase.outputargs'){
+      stop(paste('optimbase.configure: the outputcommandarg argument must be an',
+          'optimbase.outputargs object.'),call.=FALSE)
+    } else {
+      this$outputcommandarg <- value
+    }
   }
   if (key=='-numberofvariables') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classreal(var=value,varname='value',ivar=3)
     this$numberofvariables <- value
   }
   if (key=='-storehistory') {
-    assert.typeboolean(var=value,varname='value',ivar=3)
+    assert.classboolean(var=value,varname='value',ivar=3)
     this$storehistory <- value
   }
   if (key=='-costfargument') {
-    this$costfargument <- value
+    if (!is(value)=='optimbase.functionargs'){
+      stop(paste('optimbase.configure: the costargument argument must be an',
+          'optimbase.functionargs object.'),call.=FALSE)
+    } else {
+      this$costfargument <- value
+    }
   }
   if (key=='-boundsmin') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classreal(var=value,varname='value',ivar=3)
     this$boundsmin <- value
   }
   if (key=='-boundsmax') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classreal(var=value,varname='value',ivar=3)
     this$boundsmax <- value
   }
   if (key=='-nbineqconst') {
-    assert.typereal(var=value,varname='value',ivar=3)
+    assert.classreal(var=value,varname='value',ivar=3)
     this$nbineqconst <- value
   }
   if (key=='-withderivatives') {
-    assert.typeboolean(var=value,varname='value',ivar=3);
+    assert.classboolean(var=value,varname='value',ivar=3);
     this$withderivatives <- value
   }
 

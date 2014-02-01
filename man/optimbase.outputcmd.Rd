@@ -25,7 +25,7 @@
 }
 \details{
   The \code{data} list argument may contain more levels than those presented
-  above. These additionnal levels may contain values which are specific to the
+  above. These additional levels may contain values which are specific to the
   specialized algorithm, such as the simplex in a Nelder-Mead method, the
   gradient of the cost function in a BFGS method, etc...
 }

@@ -1,6 +1,5 @@
 \name{optimbase-package}
 \alias{optimbase-package}
-\alias{optimbase}
 \docType{package}
 \title{
   R port of the Scilab optimbase module
@@ -51,8 +50,8 @@
   \tabular{ll}{
   Package: \tab optimbase\cr
   Type: \tab Package\cr
-  Version: \tab 1.0-7\cr
-  Date: \tab 2011-03-30\cr
+  Version: \tab 1.0-8\cr
+  Date: \tab 2014-02-01\cr
   License: \tab CeCILL-2\cr
   LazyLoad: \tab yes
   }

@@ -1,6 +1,6 @@
 # Copyright (C) 2008-2009 - INRIA - Michael Baudin
 # Copyright (C) 2009-2010 - DIGITEO - Michael Baudin
-# Copyright (C) 2010-2011 - Sebastien Bihorel
+# Copyright (C) 2010-2014 - Sebastien Bihorel
 #
 # This file must be used under the terms of the CeCILL.
 # This source file is licensed as described in the file COPYING, which
@@ -16,13 +16,13 @@ optimbase.terminate <- function(this=NULL,previousfopt=NULL,currentfopt=NULL,
 
   terminate <- FALSE
   status <- 'continue'
-  if (this$verbose==1) this <- optimbase.stoplog(this=this,msg=sprintf('  > Termination ?'))
+  if (this$verbose==TRUE) this <- optimbase.stoplog(this=this,msg=sprintf('  > Termination ?'))
 
   #
   # Criteria #1 : maximum number of iterations
   #
   if (!terminate){
-    if (this$verbose==1)
+    if (this$verbose==TRUE)
       this <- optimbase.stoplog(this=this,
                                 msg=sprintf('  > iterations=%d >= maxiter=%d',
                                             this$iterations,this$maxiter))
@@ -36,7 +36,7 @@ optimbase.terminate <- function(this=NULL,previousfopt=NULL,currentfopt=NULL,
   # Criteria #2 : maximum number of call to function
   #
   if (!terminate){
-    if (this$verbose==1)
+    if (this$verbose==TRUE)
       this <- optimbase.stoplog(this=this,
                                 msg=sprintf('  > funevals=%d >= maxfunevals=%d',
                                             this$funevals,this$maxfunevals))
@@ -64,7 +64,7 @@ optimbase.terminate <- function(this=NULL,previousfopt=NULL,currentfopt=NULL,
       tolfa <- this$tolfunabsolute
       acfopt <- abs(currentfopt)
       apfopt <- abs(previousfopt)
-      if (this$verbose==1)
+      if (this$verbose==TRUE)
         this <- optimbase.stoplog(this=this,
                                   msg=sprintf('  > abs(currentfopt)=%e < tolfunrelative * abs(previousfopt) + tolfunabsolute=%e',
                                               acfopt,tolfr*apfopt+tolfa))
@@ -90,7 +90,7 @@ optimbase.terminate <- function(this=NULL,previousfopt=NULL,currentfopt=NULL,
       normold <- norm(currentxopt)
       tolxr <- this$tolxrelative
       tolxa <- this$tolxabsolute
-      if (this$verbose==1)
+      if (this$verbose==TRUE)
         this <- optimbase.stoplog(this=this,
                                   msg=sprintf('  > e(x)=%e < %e * %e + %e',
                                               normdelta,tolxr,normold,tolxa))
@@ -101,7 +101,7 @@ optimbase.terminate <- function(this=NULL,previousfopt=NULL,currentfopt=NULL,
       }
     }
   }
-  if (this$verbose==1)
+  if (this$verbose==TRUE)
     this <- optimbase.stoplog(this=this,
                               msg=sprintf('  > Terminate = %s, status = %s',
                                           terminate,status))

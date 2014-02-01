@@ -1,6 +1,6 @@
 # Copyright (C) 2008-2009 - INRIA - Michael Baudin
 # Copyright (C) 2009-2010 - DIGITEO - Michael Baudin
-# Copyright (C) 2010-2011 - Sebastien Bihorel
+# Copyright (C) 2010-2014 - Sebastien Bihorel
 #
 # This file must be used under the terms of the CeCILL.
 # This source file is licensed as described in the file COPYING, which
@@ -12,8 +12,10 @@
 # originally written by Michael Baudin for Scilab.
 
 optimbase.outputcmd <- function(this=NULL,state=NULL,data=NULL){
+  
   if (!is.null(this$outputcommand)){
-    if (optimtypeof(this$outputcommandarg)!='T_FARGS'){
+    if (is.null(this$outputcommandarg) ||
+      class(this$outputcommandarg)!='optimbase.outputargs'){
       this$outputcommand(state=state,data=data)
     }else{
       this$outputcommand(state=state,data=data,fmsdata=this$outputcommandarg)

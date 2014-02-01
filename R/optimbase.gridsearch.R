@@ -1,4 +1,4 @@
-# Copyright (C) 2010-2011 - Sebastien Bihorel
+# Copyright (C) 2010-2014 - Sebastien Bihorel
 #
 # This file must be used under the terms of the CeCILL.
 # This source file is licensed as described in the file COPYING, which
@@ -16,7 +16,7 @@ optimbase.gridsearch <- function(fun=NULL,x0=NULL,xmin=NULL,xmax=NULL,
   if (!is.null(xmax)) xmax <- matrix(xmax,nrow=prod(size(xmax)),ncol=1)
   
   # Configure a neldermead object
-  opt <- optimbase.new()
+  opt <- optimbase()
   opt <- optimbase.configure(this=opt,key='-x0',value=x0)
   opt <- optimbase.configure(this=opt,key='-numberofvariables',value=prod(size(x0)))
   opt <- optimbase.configure(this=opt,key='-function',value=fun)

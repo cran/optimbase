@@ -1,6 +1,6 @@
 # Copyright (C) 2008-2009 - INRIA - Michael Baudin
 # Copyright (C) 2009-2010 - DIGITEO - Michael Baudin
-# Copyright (C) 2010-2011 - Sebastien Bihorel
+# Copyright (C) 2010-2014 - Sebastien Bihorel
 #
 # This file must be used under the terms of the CeCILL.
 # This source file is licensed as described in the file COPYING, which
@@ -11,19 +11,19 @@
 # This source code is a R port of the optimbase component
 # originally written by Michael Baudin for Scilab.
 
-assert.typereal <- function(var=NULL,varname=NULL,ivar=NULL){
+assert.classreal <- function(var=NULL,varname=NULL,ivar=NULL){
   if (is.null(var))
-    stop('assert.typereal: no input specified, the variable cannot be checked.',
+    stop('assert.classreal: no input specified, the variable cannot be checked.',
          call.=FALSE)
   # Generates an error if the given variable is not of type real
   if (!is.numeric(var)) {
     if (is.null(varname) | is.null(ivar)){
-      stop(sprintf('assert.typereal: Expected real variable but got %s instead.',
-                   optimtypeof(var)),
+      stop(sprintf('assert.classreal: Expected real variable but got %s instead.',
+                   class(var)),
            call.=FALSE)
     } else {
-      stop(sprintf('assert.typereal: Expected real variable for variable %s at input #%d, but got %s instead.',
-                   varname,ivar,optimtypeof(var)),
+      stop(sprintf('assert.classreal: Expected real variable for variable %s at input #%d, but got %s instead.',
+                   varname,ivar,class(var)),
            call.=FALSE)
     }
   }

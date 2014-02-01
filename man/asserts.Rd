@@ -1,28 +1,31 @@
 \name{asserts}
-\alias{assert.typeboolean}
-\alias{assert.typefunction}
-\alias{assert.typereal}
-\alias{assert.typestring}
+\alias{assert.classboolean}
+\alias{assert.classfunction}
+\alias{assert.classreal}
+\alias{assert.classinteger}
+\alias{assert.classstring}
 \alias{unknownValueForOption}
 \title{
   Check of Variable Class
 }
 \description{
   Utility functions in \pkg{optimbase} meant to check variable class. Stop the
-  algorithm if the  variable is not of the expected class.\describe{
-    \item{\code{assert.typeboolean}}{for logical variables}
-    \item{\code{assert.typefunction}}{for functions}
-    \item{\code{assert.typereal}}{for numeric variables}
-    \item{\code{assert.typestring}}{for character variables}
+  algorithm if the variable is not of the expected class.\describe{
+    \item{\code{assert.classboolean}}{for logical variables}
+    \item{\code{assert.classfunction}}{for functions}
+    \item{\code{assert.classreal}}{for numeric variables}
+    \item{\code{assert.classinteger}}{for integer variables}
+    \item{\code{assert.classstring}}{for character variables}
   }
   \code{unknownValueForOption} stops the algorithm and returns an error
   message, when some checks in \code{optimbase} are not successful.
 }
 \usage{
-  assert.typeboolean(var = NULL, varname = NULL, ivar = NULL)
-  assert.typefunction(var = NULL, varname = NULL, ivar = NULL)
-  assert.typereal(var = NULL, varname = NULL, ivar = NULL)
-  assert.typestring(var = NULL, varname = NULL, ivar = NULL)
+  assert.classboolean(var = NULL, varname = NULL, ivar = NULL)
+  assert.classfunction(var = NULL, varname = NULL, ivar = NULL)
+  assert.classreal(var = NULL, varname = NULL, ivar = NULL)
+  assert.classinteger(var = NULL, varname = NULL, ivar = NULL)
+  assert.classstring(var = NULL, varname = NULL, ivar = NULL)
   unknownValueForOption(value = NULL, optionname = NULL)
 }
 \arguments{

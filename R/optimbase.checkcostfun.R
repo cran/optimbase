@@ -1,6 +1,6 @@
 # Copyright (C) 2008-2009 - INRIA - Michael Baudin
 # Copyright (C) 2009-2010 - DIGITEO - Michael Baudin
-# Copyright (C) 2010-2011 - Sebastien Bihorel
+# Copyright (C) 2010-2014 - Sebastien Bihorel
 #
 # This file must be used under the terms of the CeCILL.
 # This source file is licensed as described in the file COPYING, which
@@ -16,77 +16,71 @@ optimbase.checkcostfun <- function(this=NULL){
   if (length(this$x0)==0)
     stop('optimbase.checkcostfun: Cannot check cost function when x0 is empty',
          call.=FALSE)
-
+  
   #
   # If there are nonlinear constraints and no derivatives, check that the index is correctly managed.
   #
   if ((this$nbineqconst>0) & (!this$withderivatives)){
-    cmd <- paste('tmp <- optimbase.function(this=this,x=this$x0,index=index)',
-                 '  this <- tmp$this',
-                 '  f <- tmp$f',
-                 '  c <- tmp$c',
-                 '  index <- tmp$index',
-                 'rm(tmp)',
-                 sep='\n')
-    #    
-    index <- 1
-    ierr <- try(eval(parse(text=cmd)))
-    if (class(ierr)=='try-error')
+    # index: 1
+    tmp <- try(optimbase.function(this=this,x=this$x0,index=1))
+    if (class(tmp)=='try-error'){
       stop('optimbase.checkcostfun: Cannot evaluate cost function from costf(x0,1)',
-         call.=FALSE)
-    #
-    index <- 2
-    ierr <- try(eval(parse(text=cmd)))
-    if (class(ierr)=='try-error')
+        call.=FALSE)
+    } else {
+      this <- tmp$this
+    }
+    # index: 2
+    tmp <- try(optimbase.function(this=this,x=this$x0,index=2))
+    if (class(tmp)=='try-error'){
       stop('optimbase.checkcostfun: Cannot evaluate cost function from costf(x0,2)',
-         call.=FALSE)
-    this <- optimbase.checkshape(this=this,varname='f',data=f,
-                                 index=index,expectednrows=1,expectedncols=1)
-    #
-    index <- 5
-    ierr <- try(eval(parse(text=cmd)))
-    if (class(ierr)=='try-error')
+        call.=FALSE)
+    } else {
+      this <- tmp$this
+      this <- optimbase.checkshape(this=tmp$this,varname='f',data=tmp$f,
+        index=2,expectednrows=1,expectedncols=1)
+    }
+    # index: 5
+    tmp <- try(optimbase.function(this=this,x=this$x0,index=5))
+    if (class(tmp)=='try-error'){
       stop('optimbase.checkcostfun: Cannot evaluate cost function from costf(x0,5)',
-         call.=FALSE)
-    this <- optimbase.checkshape(this=this,varname='c',data=c,
-                                 index=index,expectednrows=1,
-                                 expectedncols=this$nbineqconst)
-    #
-    index = 6
-    ierr <- try(eval(parse(text=cmd)))
-    if (class(ierr)=='try-error')
+        call.=FALSE)
+    } else {
+      this <- optimbase.checkshape(this=tmp$this,varname='c',data=tmp$c,
+        index=5,expectednrows=1,expectedncols=tmp$this$nbineqconst)
+    }
+    # index: 6
+    tmp <- try(optimbase.function(this=this,x=this$x0,index=6))
+    if (class(tmp)=='try-error'){
       stop('optimbase.checkcostfun: Cannot evaluate cost function from costf(x0,6)',
-         call.=FALSE)
-    this <- optimbase.checkshape(this=this,varname='f',data=f,
-                                 index=index,expectednrows=1,expectedncols=1)
-    this <- optimbase.checkshape(this=this,varname='c',data=c,
-                                 index=index,expectednrows=1,
-                                 expectedncols=this$nbineqconst)
+        call.=FALSE)
+     } else {
+       this <- optimbase.checkshape(this=tmp$this,varname='f',data=tmp$f,
+         index=6,expectednrows=1,expectedncols=1)
+       this <- optimbase.checkshape(this=this,varname='c',data=tmp$c,
+         index=6,expectednrows=1,expectedncols=this$nbineqconst)
+     }
   }
   #
   # If there are no nonlinear constraints and no derivatives, check that the index is correctly managed.
   #
   if ((this$nbineqconst==0) & (!this$withderivatives)){
-    cmd <- paste('tmp <- optimbase.function(this=this,x=this$x0,index=index)',
-                 '  this <- tmp$this',
-                 '  f <- tmp$f',
-                 '  index <- tmp$index',
-                 'rm(tmp)',
-                 sep='\n')
-    #
-    index <- 1
-    ierr <- try(eval(parse(text=cmd)))
-    if (class(ierr)=='try-error')
+    # index: 1
+    tmp <- try(optimbase.function(this=this,x=this$x0,index=1))
+    if (class(tmp)=='try-error'){
       stop('optimbase.checkcostfun: Cannot evaluate cost function from costf(x0,1)',
-         call.=FALSE)
-    #
-    index <- 2
-    ierr <- try(eval(parse(text=cmd)))
-    if (class(ierr)=='try-error')
+        call.=FALSE)
+    } else {
+      this <- tmp$this
+    }
+    # index: 2
+    tmp <- try(optimbase.function(this=this,x=this$x0,index=2))
+    if (class(tmp)=='try-error'){
       stop('optimbase.checkcostfun: Cannot evaluate cost function from costf(x0,2)',
-         call.=FALSE)
-    this <- optimbase.checkshape(this=this,varname='f',data=f,
-                                 index=index,expectednrows=1,expectedncols=1)
+        call.=FALSE)
+    } else {
+      this <- optimbase.checkshape(this=tmp$this,varname='f',data=tmp$f,
+        index=2,expectednrows=1,expectedncols=1)
+    }
   }
   #
   # If there are no nonlinear constraints and derivatives, check that the index is correctly managed.
@@ -99,41 +93,44 @@ optimbase.checkcostfun <- function(this=NULL){
                  '  index <- tmp$index',
                  'rm(tmp)',
                  sep='\n')
-    #
-    index <- 1
-    ierr <- try(eval(parse(text=cmd)))
-    if (class(ierr)=='try-error')
+    # index: 1
+    tmp <- try(optimbase.function(this=this,x=this$x0,index=1))
+    if (class(tmp)=='try-error'){
       stop('optimbase.checkcostfun: Cannot evaluate cost function from costf(x0,1)',
-         call.=FALSE)
-    #
-    index <- 2
-    ierr <- try(eval(parse(text=cmd)))
-    if (class(ierr)=='try-error')
+        call.=FALSE)
+    } else {
+      this <- tmp$this
+    }
+    # index: 2
+    tmp <- try(optimbase.function(this=this,x=this$x0,index=2))
+    if (class(tmp)=='try-error'){
       stop('optimbase.checkcostfun: Cannot evaluate cost function from costf(x0,2)',
-         call.=FALSE)
-    this <- optimbase.checkshape(this=this,varname='f',data=f,
-                                 index=index,expectednrows=1,expectedncols=1)
-    #
-    index <- 3
-    ierr <- try(eval(parse(text=cmd)))
-    if (class(ierr)=='try-error')
+        call.=FALSE)
+    } else {
+      this <- optimbase.checkshape(this=tmp$this,varname='f',data=tmp$f,
+        index=2,expectednrows=1,expectedncols=1)
+    }
+    # index: 3
+    tmp <- try(optimbase.function(this=this,x=this$x0,index=3))
+    if (class(tmp)=='try-error'){
       stop('optimbase.checkcostfun: Cannot evaluate cost function from costf(x0,3)',
-         call.=FALSE)
-    this <- optimbase.checkshape(this=this,varname='g',data=g,
-                                 index=index,expectednrows=1,
-                                 expectedncols=this$numberofvariables)
-    #
-    index <- 4
-    ierr <- try(eval(parse(text=cmd)))
-    if (class(ierr)=='try-error')
+        call.=FALSE)
+    } else {
+      this <- optimbase.checkshape(this=tmp$this,varname='g',data=tmp$g,
+        index=3,expectednrows=1,expectedncols=tmp$this$numberofvariables)
+    }
+    # index: 4
+    tmp <- try(optimbase.function(this=this,x=this$x0,index=4))
+    if (class(tmp)=='try-error'){
       stop('optimbase.checkcostfun: Cannot evaluate cost function from costf(x0,4)',
-         call.=FALSE)
-    this <- optimbase.checkshape(this=this,varname='f',data=f,
-                                 index=index,expectednrows=1,expectedncols=1)
-    this <- optimbase.checkshape(this=this,varname='g',data=g,
-                                 index=index,expectednrows=1,
-                                 expectedncols=this$numberofvariables)
-  }    
+        call.=FALSE)
+    } else {
+      this <- optimbase.checkshape(this=tmp$this,varname='f',data=tmp$f,
+        index=4,expectednrows=1,expectedncols=1)
+      this <- optimbase.checkshape(this=this,varname='g',data=tmp$g,
+        index=4,expectednrows=1,expectedncols=this$numberofvariables)
+    }
+  }
 
   return(this)
 }

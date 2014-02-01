@@ -1,6 +1,6 @@
 # Copyright (C) 2008-2009 - INRIA - Michael Baudin
 # Copyright (C) 2009-2010 - DIGITEO - Michael Baudin
-# Copyright (C) 2010-2011 - Sebastien Bihorel
+# Copyright (C) 2010-2014 - Sebastien Bihorel
 #
 # This file must be used under the terms of the CeCILL.
 # This source file is licensed as described in the file COPYING, which
@@ -20,7 +20,7 @@ optimbase.outstruct <- function(this=NULL){
                  fval=this$fopt,
                  iteration=this$iterations,
                  funccount=this$funevals)
-    attr(data,'type') <- 'T_OPTDATA'
+    class(data) <- 'optimbase.outputdata'
   }
   
   return(data)

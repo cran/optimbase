@@ -1,6 +1,6 @@
 # Copyright (C) 2008-2009 - INRIA - Michael Baudin
 # Copyright (C) 2009-2010 - DIGITEO - Michael Baudin
-# Copyright (C) 2010-2011 - Sebastien Bihorel
+# Copyright (C) 2010-2014 - Sebastien Bihorel
 #
 # This file must be used under the terms of the CeCILL.
 # This source file is licensed as described in the file COPYING, which
@@ -27,7 +27,7 @@ optimbase.function <- function(this=NULL,x=NULL,index=NULL){
   # Setup output
   varargout <- list(this=this,f=NULL,g=NULL,c=NULL,gc=NULL,index=index)
 
-  if (this$verbose==1)
+  if (this$verbose==TRUE)
     this <- optimbase.log(this=this,
                           msg=sprintf('Function Evaluation #%d at [%s]',
                                       this$funevals,
@@ -35,7 +35,8 @@ optimbase.function <- function(this=NULL,x=NULL,index=NULL){
 
   if (this$withderivatives){
     if (this$nbineqconst==0){
-      if (optimtypeof(this$costfargument)!='T_FARGS'){
+      if (is.null(this$costfargument) ||
+        class(this$costfargument)!='optimbase.functionargs'){
         tmp <- this$fun(x=x,index=index)
           varargout$f <- tmp$f
           varargout$g <- tmp$g
@@ -50,7 +51,8 @@ optimbase.function <- function(this=NULL,x=NULL,index=NULL){
         rm(tmp)
       }
     } else {
-      if (optimtypeof(this$costfargument)!='T_FARGS'){
+      if (is.null(this$costfargument) ||
+        class(this$costfargument)!='optimbase.functionargs'){
         tmp <- this$fun(x=x,index=index)
           varargout$f <- tmp$f
           varargout$g <- tmp$g
@@ -71,7 +73,8 @@ optimbase.function <- function(this=NULL,x=NULL,index=NULL){
     }
   } else {
     if (this$nbineqconst==0){
-      if (optimtypeof(this$costfargument)!='T_FARGS'){
+      if (is.null(this$costfargument) ||
+        class(this$costfargument)!='optimbase.functionargs'){
         tmp <- this$fun(x=x,index=index)
           varargout$f <- tmp$f
           varargout$index <- tmp$index
@@ -84,7 +87,8 @@ optimbase.function <- function(this=NULL,x=NULL,index=NULL){
         rm(tmp)
       }
     } else {
-      if (optimtypeof(this$costfargument)!='T_FARGS'){
+      if (is.null(this$costfargument) ||
+        class(this$costfargument)!='optimbase.functionargs'){
         tmp <- this$fun(x,index)
           varargout$f <- tmp$f
           varargout$c <- tmp$c

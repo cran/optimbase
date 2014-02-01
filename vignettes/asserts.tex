@@ -1,20 +1,22 @@
 \inputencoding{utf8}
 \HeaderA{asserts}{Check of Variable Class}{asserts}
-\aliasA{assert.typeboolean}{asserts}{assert.typeboolean}
-\aliasA{assert.typefunction}{asserts}{assert.typefunction}
-\aliasA{assert.typereal}{asserts}{assert.typereal}
-\aliasA{assert.typestring}{asserts}{assert.typestring}
+\aliasA{assert.classboolean}{asserts}{assert.classboolean}
+\aliasA{assert.classfunction}{asserts}{assert.classfunction}
+\aliasA{assert.classinteger}{asserts}{assert.classinteger}
+\aliasA{assert.classreal}{asserts}{assert.classreal}
+\aliasA{assert.classstring}{asserts}{assert.classstring}
 \aliasA{unknownValueForOption}{asserts}{unknownValueForOption}
 \keyword{method}{asserts}
 %
 \begin{Description}\relax
 Utility functions in \pkg{optimbase} meant to check variable class. Stop the
-algorithm if the  variable is not of the expected class.\begin{description}
+algorithm if the variable is not of the expected class.\begin{description}
 
-\item[\code{assert.typeboolean}] for logical variables
-\item[\code{assert.typefunction}] for functions
-\item[\code{assert.typereal}] for numeric variables
-\item[\code{assert.typestring}] for character variables
+\item[\code{assert.classboolean}] for logical variables
+\item[\code{assert.classfunction}] for functions
+\item[\code{assert.classreal}] for numeric variables
+\item[\code{assert.classinteger}] for integer variables
+\item[\code{assert.classstring}] for character variables
 
 \end{description}
 
@@ -24,10 +26,11 @@ message, when some checks in \code{optimbase} are not successful.
 %
 \begin{Usage}
 \begin{verbatim}
-  assert.typeboolean(var = NULL, varname = NULL, ivar = NULL)
-  assert.typefunction(var = NULL, varname = NULL, ivar = NULL)
-  assert.typereal(var = NULL, varname = NULL, ivar = NULL)
-  assert.typestring(var = NULL, varname = NULL, ivar = NULL)
+  assert.classboolean(var = NULL, varname = NULL, ivar = NULL)
+  assert.classfunction(var = NULL, varname = NULL, ivar = NULL)
+  assert.classreal(var = NULL, varname = NULL, ivar = NULL)
+  assert.classinteger(var = NULL, varname = NULL, ivar = NULL)
+  assert.classstring(var = NULL, varname = NULL, ivar = NULL)
   unknownValueForOption(value = NULL, optionname = NULL)
 \end{verbatim}
 \end{Usage}

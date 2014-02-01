@@ -14,8 +14,8 @@
   \item{this}{An optimization object.}
 }
 \value{
-  Return a list with a 'type' attribute set to 'T_OPTDATA' and with the
-  following elements: \describe{
+  Return an object of class 'optimbase.data', i.e. a list with the following 
+  elements: \describe{
     \item{x}{The current optimum point estimate (extracted from
       \code{this$xopt}).}
     \item{fval}{The value of the cost function at the current optimum point

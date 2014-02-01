@@ -76,8 +76,7 @@ gridfun <- function(x=NULL,index=NULL,fmsfundata=NULL,...){
     c <- c(10 - 2*x[1] - x[2],
            x[1],
            x[2])
-  varargout <- list(f = f, g = c(), c = c, gc = c(), index = index,
-                    this = list(costfargument = fmsfundata))
+  varargout <- list(f = f, g = c(), c = c, gc = c(), index = index)
 
   return(varargout)
 }
@@ -87,9 +86,11 @@ x0 <- c(0.35,0.3)
 npts <- 6
 alpha <- 10
 
-optimbase.gridsearch(fun=gridfun,x0=x0,xmin=NULL,xmax=NULL,
+res <- optimbase.gridsearch(fun=gridfun,x0=x0,xmin=NULL,xmax=NULL,
                      npts=npts,alpha=alpha)
 
 # 3.5 and 3 is the actual solution of the optimization problem
+print(res)
+
 \end{ExampleCode}
 \end{Examples}

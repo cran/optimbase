@@ -1,10 +1,35 @@
+2014/01/26 Sebastien Bihorel <sb.pmlab@gmail.com>
+
+  * Change vignette data location to comply to R 3.0 requirements 
+  * Add NAMESPACE
+  * Rename .Rnw file due to creation of optimbase.tex doc file
+  * Formal creation of "existing" or new classes:
+    - optimbase: this class replaces the T_OPTIMIZATION attribute and optimbase 
+      function replaces optimbase.new function
+    - optimbase.functionargs: this class replaces the T_FARGS attribute for the
+      costargument level of optimbase object.
+    - optimbase.outputargs: this class replaces the T_FARGS attribute for the
+      outputcommandarg level of optimbase object.
+    - optimbase.outputdata: this class replaces the T_OPTDATA attribute in the
+      output of the optimbase.outstruct object
+  * Add as, is, summary, and print methods for optimbase class objects
+  * optimbase.configure: 
+    - verbose and verbosetermination levels in optimbase objects are now 
+      booleans (this is reflected in functions using those levels of optimbase
+      objects).
+    - costargument level set to a optimbase.functionargs object
+    - outputcommandarg level set to a optimbase.outputargs object
+  * optimbase.function: updates to take into account new classes
+  * Rename 'assert.type' functions to 'assert.class'
+  * deprecated function: optimbase.new, optimtypeof
+  
 2011/03/30 Sebastien Bihorel <sb.pmlab@gmail.com>
 
   * Corrected encoding of vignette source (latin1 instead of utf8x)
   
 2011/03/16 Sebastien Bihorel <sb.pmlab@gmail.com>
   
-  * optimbase.gridsearch: restricted grid expansion to avoid over user of
+  * optimbase.gridsearch: restricted grid expansion to avoid over use of
   memory.
 
 2011/01/09 Sebastien Bihorel <sb.pmlab@gmail.com>

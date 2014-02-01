@@ -51,7 +51,7 @@
   Author of R adaptation: Sebastien Bihorel (\email{sb.pmlab@gmail.com})
 }
 \seealso{
-  \code{\link[optimbase]{optimbase.new}},
+  \code{\link[optimbase]{optimbase}},
   \code{\link[optimbase]{optimbase.configure}}
 }
 \keyword{ method }

@@ -1,9 +1,10 @@
-\documentclass[letterpaper,10ptoneside]{article}
+\documentclass[letterpaper]{article}
 
 %\VignetteIndexEntry{Introduction to the optimbase package}
 %\VignettePackage{optimbase}
 
 % Load packages
+\usepackage{Sweave}
 \usepackage{Rd}
 \usepackage{ucs}
 \usepackage[latin1]{inputenc}
@@ -12,7 +13,6 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}   % need for figures
-\usepackage{pstricks}
 \usepackage{verbatim}   % useful for program listings
 \usepackage{color}      % use if color is used in text
 \usepackage[pdfborder={0 0 0}]{hyperref}   % use for hypertext links, including
@@ -25,7 +25,7 @@
 % Defines some custom commands
 \newcommand{\optimbase}{\pkg{optimbase}}
 
-\title{The optimbase Package - version 1.0-6}
+\title{The optimbase Package - version 1.0-8}
 \author{S\'ebastien Bihorel}
 
 \begin{document}
@@ -75,8 +75,8 @@ constraints.
 \subsection{Basic object}
 The basic object used by the \pkg{optimbase} package to store the configuration
 settings and the history of an optimization is a 'optimization' object, i.e. a
-list typically created by \code{optimbase.new} and having a strictly defined
-structure (see \code{?optimbase.new} for more details).
+list typically created by \code{optimbase} and having a strictly defined
+structure (see \code{?optimbase} for more details).
 
 \subsection{The cost function}
 The \code{fun} element of the optimization object (thereafter referred to as
@@ -262,6 +262,7 @@ map given in the \pkg{neldermead} package.
 \input{optimbase-package}
 \input{asserts}
 \input{ones}
+\input{optimbase}
 \input{optimbase.checkbounds}
 \input{optimbase.checkcostfun}
 \input{optimbase.checkshape}
@@ -276,12 +277,10 @@ map given in the \pkg{neldermead} package.
 \input{optimbase.isfeasible}
 \input{optimbase.isinbounds}
 \input{optimbase.log}
-\input{optimbase.new}
 \input{optimbase.outputcmd}
 \input{optimbase.outstruct}
 \input{optimbase.proj2bnds}
 \input{optimbase.terminate}
-\input{optimtypeof}
 \input{size}
 \input{strvec}
 \input{transpose}

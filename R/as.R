@@ -1,5 +1,3 @@
-# Copyright (C) 2008-2009 - INRIA - Michael Baudin
-# Copyright (C) 2009-2010 - DIGITEO - Michael Baudin
 # Copyright (C) 2010-2014 - Sebastien Bihorel
 #
 # This file must be used under the terms of the CeCILL.
@@ -8,13 +6,17 @@
 # are also available at
 # http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
 #
-# This source code is a R port of the optimbase component
-# originally written by Michael Baudin for Scilab.
 
-optimbase.incriter <- function(this=NULL){
-
-  this$iterations <- this$iterations + 1
-
-  return(this)
+as.optimbase.functionargs <- function(x=NULL){
+  
+  x <- unclass(x)
+  structure(as.list(x),class='optimbase.functionargs')
+  
 }
 
+as.optimbase.outputargs <- function(x=NULL){
+  
+  x <- unclass(x)
+  structure(as.list(x),class='optimbase.outputargs')
+  
+}
