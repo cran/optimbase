@@ -13,8 +13,8 @@
 
 optimbase <- function(verbose, x0, fx0, xopt, fopt, tolfunabsolute, 
   tolfunrelative, tolfunmethod, tolxabsolute, tolxrelative, tolxmethod, 
-  funevals, maxfunevals, maxiter, iterations, fun, status, historyfopt,
-  historyxopt, verbosetermination, outputcommand, outputcommandarg,
+  maxfunevals, funevals, maxiter, iterations, fun, status, historyxopt,
+  historyfopt, verbosetermination, outputcommand, outputcommandarg,
   numberofvariables, storehistory, costfargument, boundsmin, boundsmax,
   nbineqconst, logfile, logfilehandle, logstartup, withderivatives){
   
@@ -30,14 +30,14 @@ optimbase <- function(verbose, x0, fx0, xopt, fopt, tolfunabsolute,
     tolxabsolute = 0,
     tolxrelative = .Machine$double.eps,
     tolxmethod = TRUE,
-    funevals = 0,
     maxfunevals = 100,
+    funevals = 0,
     maxiter = 100,
     iterations = 0,
     fun = '',
     status = '',
-    historyfopt = c(),
     historyxopt = c(),
+    historyfopt = c(),
     verbosetermination = FALSE,
     outputcommand = '',
     outputcommandarg = '',
@@ -56,141 +56,141 @@ optimbase <- function(verbose, x0, fx0, xopt, fopt, tolfunabsolute,
   
   # The verbose option, controlling the amount of messages
   if (!missing(verbose))
-    newobj <- optimbase.configure(this=newobj,key='-verbose',value=verbose)
+    newobj <- optimbase.set(this=newobj,key='verbose',value=verbose)
   
   # The initial guess
   if (!missing(x0))
-    newobj <- optimbase.configure(this=newobj,key='-x0',value=x0)
+    newobj <- optimbase.set(this=newobj,key='x0',value=x0)
   
   # The value of the function for the initial guess
   if (!missing(fx0))
-    newobj <- optimbase.configure(this=newobj,key='-fx0',value=fx0)
+    newobj <- optimbase.set(this=newobj,key='fx0',value=fx0)
   
   # The optimum parameter
   if (!missing(xopt))
-    newobj <- optimbase.configure(this=newobj,key='-xopt',value=xopt)
+    newobj <- optimbase.set(this=newobj,key='xopt',value=xopt)
   
   # The optimum function value
   if (!missing(fopt))
-    newobj <- optimbase.configure(this=newobj,key='-fopt',value=fopt)
+    newobj <- optimbase.set(this=newobj,key='fopt',value=fopt)
   
   # The absolute tolerance on function value
   if (!missing(tolfunabsolute))
-    newobj <- optimbase.configure(this=newobj,key='-tolfunabsolute',value=tolfunabsolute)
+    newobj <- optimbase.set(this=newobj,key='tolfunabsolute',value=tolfunabsolute)
   
   # The relative tolerance on function value
   if (!missing(tolfunrelative))
-    newobj <- optimbase.configure(this=newobj,key='-tolfunrelative',value=tolfunrelative)
+    newobj <- optimbase.set(this=newobj,key='tolfunrelative',value=tolfunrelative)
   
   # Possible values : FALSE, TRUE
   # This criteria is suitable for functions which minimum is
   # associated with a function value equal to 0.
   if (!missing(tolfunmethod))
-    newobj <- optimbase.configure(this=newobj,key='-tolfunmethod',value=tolfunmethod)
+    newobj <- optimbase.set(this=newobj,key='tolfunmethod',value=tolfunmethod)
   
   # The absolute tolerance on x
   if (!missing(tolxabsolute))
-    newobj <- optimbase.configure(this=newobj,key='-tolxabsolute',value=tolxabsolute)
+    newobj <- optimbase.set(this=newobj,key='tolxabsolute',value=tolxabsolute)
   
   # The relative tolerance on x
   if (!missing(tolxrelative))
-    newobj <- optimbase.configure(this=newobj,key='-tolxrelative',value=tolxrelative)
+    newobj <- optimbase.set(this=newobj,key='tolxrelative',value=tolxrelative)
   
   # Possible values : FALSE, TRUE
   if (!missing(tolxmethod))
-    newobj <- optimbase.configure(this=newobj,key='-tolxmethod',value=tolxmethod)
-  
-  # The number of function evaluations
-  if (!missing(funevals))
-    newobj <- optimbase.configure(this=newobj,key='-funevals',value=funevals)
+    newobj <- optimbase.set(this=newobj,key='tolxmethod',value=tolxmethod)
   
   # The maximum number of function evaluations
   if (!missing(maxfunevals))
-    newobj <- optimbase.configure(this=newobj,key='-maxfunevals',value=maxfunevals)
+    newobj <- optimbase.set(this=newobj,key='maxfunevals',value=maxfunevals)
+  
+  # The number of function evaluations
+  if (!missing(funevals))
+    newobj <- optimbase.set(this=newobj,key='funevals',value=funevals)
   
   # The maximum number of iterations
   if (!missing(maxiter))
-    newobj <- optimbase.configure(this=newobj,key='-maxiter',value=maxiter)
+    newobj <- optimbase.set(this=newobj,key='maxiter',value=maxiter)
   
   # The number of iterations
   if (!missing(iterations))
-    newobj <- optimbase.configure(this=newobj,key='-iterations',value=iterations)
+    newobj <- optimbase.set(this=newobj,key='iterations',value=iterations)
   
   # The cost function
   if (!missing(fun))
-    newobj <- optimbase.configure(this=newobj,key='-fun',value=fun)
+    newobj <- optimbase.set(this=newobj,key='fun',value=fun)
   
   # The status of the optimization
   if (!missing(status))
-    newobj <- optimbase.configure(this=newobj,key='-status',value=status)
+    newobj <- optimbase.set(this=newobj,key='status',value=status)
   
   # The array to store the history for fopt
   if (!missing(historyfopt))
-    newobj <- optimbase.configure(this=newobj,key='-historyfopt',value=historyfopt)
+    newobj <- optimbase.set(this=newobj,key='historyfopt',value=historyfopt)
   
   # The array to store the history for xopt
   if (!missing(historyxopt))
-    newobj <- optimbase.configure(this=newobj,key='-historyxopt',value=historyxopt)
+    newobj <- optimbase.set(this=newobj,key='historyxopt',value=historyxopt)
   
   # The verbose option for termination criteria
   if (!missing(verbosetermination))
-    newobj <- optimbase.configure(this=newobj,key='-verbosetermination',value=verbosetermination)
+    newobj <- optimbase.set(this=newobj,key='verbosetermination',value=verbosetermination)
   
   # The command called back for output
   if (!missing(outputcommand))
-    newobj <- optimbase.configure(this=newobj,key='-outputcommand',value=outputcommand)
+    newobj <- optimbase.set(this=newobj,key='outputcommand',value=outputcommand)
   
   # The outputcommand argument is initialized as a string.
-  # If the user configure this option, it is expected
+  # If the user configures this option, it is expected
   # that a matrix of values or a list, tlist, mlist is
   # passed so that the argument is appended to the name of the
   # function.
   if (!missing(outputcommandarg))
-    newobj <- optimbase.configure(this=newobj,key='-outputcommandarg',value=outputcommandarg)
+    newobj <- optimbase.set(this=newobj,key='outputcommandarg',value=outputcommandarg)
   
   # The number of variables to optimize
   if (!missing(numberofvariables))
-    newobj <- optimbase.configure(this=newobj,key='-numberofvariables',value=numberofvariables)
+    newobj <- optimbase.set(this=newobj,key='numberofvariables',value=numberofvariables)
   
   # The flag which enables/disables the storing of the history
   if (!missing(storehistory))
-    newobj <- optimbase.configure(this=newobj,key='-storehistory',value=storehistory)
+    newobj <- optimbase.set(this=newobj,key='storehistory',value=storehistory)
   
   # The costf argument is initialized as a string.
-  # If the user configure this option, it is expected
+  # If the user configures this option, it is expected
   # that a matrix of values or a list, tlist, mlist is
   # passed so that the argument is appended to the name of the
   # function.
   if (!missing(costfargument))
-    newobj <- optimbase.configure(this=newobj,key='-costfargument',value=costfargument)
+    newobj <- optimbase.set(this=newobj,key='costfargument',value=costfargument)
   
   # Minimum bounds for the parameters
   if (!missing(boundsmin))
-    newobj <- optimbase.configure(this=newobj,key='-boundsmin',value=boundsmin)
+    newobj <- optimbase.set(this=newobj,key='boundsmin',value=boundsmin)
   
   # Maximum bounds for the parameters
   if (!missing(boundsmax))
-    newobj <- optimbase.configure(this=newobj,key='-boundsmax',value=boundsmax)
+    newobj <- optimbase.set(this=newobj,key='boundsmax',value=boundsmax)
   
   # The number of nonlinear inequality constraints
   if (!missing(nbineqconst))
-    newobj <- optimbase.configure(this=newobj,key='-nbineqconst',value=nbineqconst)
+    newobj <- optimbase.set(this=newobj,key='nbineqconst',value=nbineqconst)
   
   # The name of the log file
   if (!missing(logfile))
-    newobj <- optimbase.configure(this=newobj,key='-logfile',value=logfile)
+    newobj <- optimbase.set(this=newobj,key='logfile',value=logfile)
   
   # The handle for the log file
   if (!missing(logfilehandle))
-    newobj <- optimbase.configure(this=newobj,key='-logfilehandle',value=logfilehandle)
+    newobj <- optimbase.set(this=newobj,key='logfilehandle',value=logfilehandle)
   
   # Set to TRUE when the logging is started up
   if (!missing(logstartup))
-    newobj <- optimbase.configure(this=newobj,key='-logstartup',value=logstartup)
+    newobj <- optimbase.set(this=newobj,key='logstartup',value=logstartup)
   
   # Set to TRUE when the method uses derivatives
   if (!missing(withderivatives))
-    newobj <- optimbase.configure(this=newobj,key='-withderivatives',value=withderivatives)
+    newobj <- optimbase.set(this=newobj,key='withderivatives',value=withderivatives)
   
   class(newobj) <- 'optimbase'
   

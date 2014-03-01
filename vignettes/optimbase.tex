@@ -22,8 +22,8 @@ or coerce it to one of these classes.
 \begin{verbatim}
   optimbase(verbose, x0, fx0, xopt, fopt, tolfunabsolute, 
     tolfunrelative, tolfunmethod, tolxabsolute, tolxrelative, tolxmethod, 
-    funevals, maxfunevals, maxiter, iterations, fun, status, historyfopt,
-    historyxopt, verbosetermination, outputcommand, outputcommandarg,
+    maxfunevals, funevals, maxiter, iterations, fun, status, historyxopt,
+    historyfopt, verbosetermination, outputcommand, outputcommandarg,
     numberofvariables, storehistory, costfargument, boundsmin, boundsmax,
     nbineqconst, logfile, logfilehandle, logstartup, withderivatives)
   
@@ -70,20 +70,20 @@ minimum is associated with a function value equal to 0.
 \item[\code{tolxabsolute}] The absolute tolerance on x..
 \item[\code{tolxrelative}] The relative tolerance on x.
 \item[\code{tolxmethod}] Possible values: FALSE, TRUE.
-\item[\code{funevals}] The number of function evaluations.
 \item[\code{maxfunevals}] The maximum number of function evaluations.
+\item[\code{funevals}] The number of function evaluations.
 \item[\code{maxiter}] The maximum number of iterations.
 \item[\code{iterations}] The number of iterations.
 \item[\code{fun}] The cost function.
 \item[\code{status}] The status of the optimization.
-\item[\code{historyfopt}] The vector to store the history for fopt. The values of
-the cost function will be stored at each iteration in a new element, so
-the length of \code{historyfopt} at the end of the optimization should be
-the number of iterations.
 \item[\code{historyxopt}] The list to store the history for xopt. The vectors of
 estimates will be stored on separated levels of the list, so the length of
 \code{historyfopt} at the end of the optimization should be the number of
 iterations.
+\item[\code{historyfopt}] The vector to store the history for fopt. The values of
+the cost function will be stored at each iteration in a new element, so
+the length of \code{historyfopt} at the end of the optimization should be
+the number of iterations.
 \item[\code{verbosetermination}] The verbose option for termination criteria.
 \item[\code{outputcommand}] The command called back for output. This must be a 
 valid R function accepting the following arguments: \begin{description}
@@ -148,8 +148,8 @@ a list containing the following elements:\begin{description}
 \item[tolxabsolute] Default is 0.
 \item[tolxrelative] Default is .Machine\$double.eps.
 \item[tolxmethod] Default is TRUE.
-\item[funevals] Default is 0.
 \item[maxfunevals] Default is 100.
+\item[funevals] Default is 0.
 \item[maxiter] Default is 100.
 \item[iterations] Default is 0.
 \item[fun] Default is ''.

@@ -21,14 +21,14 @@ optimbase.histget <- function(this=NULL,iter=NULL,key=NULL){
     stop(sprintf('optimbase_histget: Negative iteration index %d is not allowed.',iter),
          call.=FALSE)
 
-  if (!any(key=c('-historyxopt','historyfopt')))
+  if (!any(key=c('historyxopt','historyfopt')))
     stop(sprintf('optimbase_histget: Unknown key %s',key),
          call.=FALSE)
 
-  if (key=='-historyxopt'){
+  if (key=='historyxopt'){
     value <- this$historyxopt[[iter]]
   }
-  if (key=='-historyfopt'){
+  if (key=='historyfopt'){
     value = this$historyfopt[iter]
   }
 

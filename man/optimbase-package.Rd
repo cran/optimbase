@@ -50,8 +50,8 @@
   \tabular{ll}{
   Package: \tab optimbase\cr
   Type: \tab Package\cr
-  Version: \tab 1.0-8\cr
-  Date: \tab 2014-02-01\cr
+  Version: \tab 1.0-9\cr
+  Date: \tab 2014-03-01\cr
   License: \tab CeCILL-2\cr
   LazyLoad: \tab yes
   }

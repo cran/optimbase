@@ -13,36 +13,23 @@
 
 optimbase.get <- function(this=NULL,key=NULL){
 
-  if (!any(key==c('-funevals','-iterations','-xopt','-fopt','-historyxopt',
-                  '-historyfopt','-fx0','-status','-logstartup')))
+  if (!any(key==c('verbose','x0','fx0','xopt','fopt','tolfunabsolute',
+      'tolfunrelative','tolfunmethod','tolxabsolute','tolxrelative',
+      'tolxmethod','maxfunevals','funevals','maxiter','iterations','function',
+      'status','historyfopt','historyxopt','verbosetermination','outputcommand',
+      'outputcommandarg','numberofvariables','storehistory','costfargument',
+      'boundsmin','boundsmax','nbineqconst','logfile','logfilehandle',
+      'logstartup','withderivatives'))){
     stop(sprintf('optimbase.get: Unknown key %s',key),
-         call.=FALSE)
-
-  if (key=='-funevals')   value <- this$funevals
-  if (key=='-iterations') value <- this$iterations
-  if (key=='-xopt')       value <- this$xopt
-  if (key=='-fopt')       value <- this$fopt
-  if (key=='-historyxopt'){
-    if (!this$storehistory){
-      stop('optimbase.get: History disabled ; enable -storehistory option.',
-           call.=FALSE)
-    } else {
-      value <- this$historyxopt
-    }
+      call.=FALSE)
   }
-  if (key=='-historyfopt'){
-    if (!this$storehistory){
-      stop('optimbase.get: History disabled ; enable -storehistory option.',
-           call.=FALSE)
-    } else {
-      value <- this$historyfopt
-    }
+  
+  if ((key=='historyxopt' | key=='historyfopt') & (!this$storehistory)){
+    stop('optimbase.get: History disabled ; enable storehistory option.',
+      call.=FALSE)
   }
-  if (key=='-fx0')        value <- this$fx0
-  if (key=='-status')     value <- this$status
-  if (key=='-logstartup') value <- this$logstartup
-
-  return(value)
+  
+  return(this[[key]])
   
 }
 

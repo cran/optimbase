@@ -25,7 +25,7 @@
 % Defines some custom commands
 \newcommand{\optimbase}{\pkg{optimbase}}
 
-\title{The optimbase Package - version 1.0-8}
+\title{The optimbase Package - version 1.0-9}
 \author{S\'ebastien Bihorel}
 
 \begin{document}
@@ -267,7 +267,6 @@ map given in the \pkg{neldermead} package.
 \input{optimbase.checkcostfun}
 \input{optimbase.checkshape}
 \input{optimbase.checkx0}
-\input{optimbase.configure}
 \input{optimbase.destroy}
 \input{optimbase.function}
 \input{optimbase.get}
@@ -280,6 +279,7 @@ map given in the \pkg{neldermead} package.
 \input{optimbase.outputcmd}
 \input{optimbase.outstruct}
 \input{optimbase.proj2bnds}
+\input{optimbase.set}
 \input{optimbase.terminate}
 \input{size}
 \input{strvec}

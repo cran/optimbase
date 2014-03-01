@@ -14,19 +14,19 @@
 optimbase.histset <- function(this=NULL,iter=NULL,key=NULL,value=NULL){
 
   if (!this$storehistory)
-    stop('optimbase.histset: History disabled ; turn on -storehistory option.',
+    stop('optimbase.histset: History disabled ; turn on storehistory option.',
          call.=FALSE)
 
   if (iter<1)
     stop('optimbase.histset: Negative iteration index are not allowed.',
          call.=FALSE)
 
-  if (!any(key==c('-historyxopt','-historyfopt')))
+  if (!any(key==c('historyxopt','historyfopt')))
     stop(sprintf('optimbase.histset: Unknown key %s',key),
          call.=FALSE)
 
-  if (key=='-historyxopt') this$historyxopt[[iter]] <- value
-  if (key=='-historyfopt') this$historyfopt[iter] <- value
+  if (key=='historyxopt') this$historyxopt[[iter]] <- value
+  if (key=='historyfopt') this$historyfopt[iter] <- value
 
   return(this)
   

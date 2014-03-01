@@ -21,8 +21,8 @@
 \usage{
   optimbase(verbose, x0, fx0, xopt, fopt, tolfunabsolute, 
     tolfunrelative, tolfunmethod, tolxabsolute, tolxrelative, tolxmethod, 
-    funevals, maxfunevals, maxiter, iterations, fun, status, historyfopt,
-    historyxopt, verbosetermination, outputcommand, outputcommandarg,
+    maxfunevals, funevals, maxiter, iterations, fun, status, historyxopt,
+    historyfopt, verbosetermination, outputcommand, outputcommandarg,
     numberofvariables, storehistory, costfargument, boundsmin, boundsmax,
     nbineqconst, logfile, logfilehandle, logstartup, withderivatives)
   
@@ -59,20 +59,20 @@
   \item{tolxabsolute}{The absolute tolerance on x..}
   \item{tolxrelative}{The relative tolerance on x.}
   \item{tolxmethod}{Possible values: FALSE, TRUE.}
-  \item{funevals}{The number of function evaluations.}
   \item{maxfunevals}{The maximum number of function evaluations.}
+  \item{funevals}{The number of function evaluations.}
   \item{maxiter}{The maximum number of iterations.}
   \item{iterations}{The number of iterations.}
   \item{fun}{The cost function.}
   \item{status}{The status of the optimization.}
-  \item{historyfopt}{The vector to store the history for fopt. The values of
-    the cost function will be stored at each iteration in a new element, so
-    the length of \code{historyfopt} at the end of the optimization should be
-    the number of iterations.}
   \item{historyxopt}{The list to store the history for xopt. The vectors of
     estimates will be stored on separated levels of the list, so the length of
     \code{historyfopt} at the end of the optimization should be the number of
     iterations.}
+  \item{historyfopt}{The vector to store the history for fopt. The values of
+    the cost function will be stored at each iteration in a new element, so
+    the length of \code{historyfopt} at the end of the optimization should be
+    the number of iterations.}
   \item{verbosetermination}{The verbose option for termination criteria.}
   \item{outputcommand}{The command called back for output. This must be a 
     valid R function accepting the following arguments: \describe{
@@ -128,8 +128,8 @@
     \item{tolxabsolute}{Default is 0.}
     \item{tolxrelative}{Default is .Machine$double.eps.}
     \item{tolxmethod}{Default is TRUE.}
-    \item{funevals}{Default is 0.}
     \item{maxfunevals}{Default is 100.}
+    \item{funevals}{Default is 0.}
     \item{maxiter}{Default is 100.}
     \item{iterations}{Default is 0.}
     \item{fun}{Default is ''.}

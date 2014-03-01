@@ -17,13 +17,13 @@ optimbase.gridsearch <- function(fun=NULL,x0=NULL,xmin=NULL,xmax=NULL,
   
   # Configure a neldermead object
   opt <- optimbase()
-  opt <- optimbase.configure(this=opt,key='-x0',value=x0)
-  opt <- optimbase.configure(this=opt,key='-numberofvariables',value=prod(size(x0)))
-  opt <- optimbase.configure(this=opt,key='-function',value=fun)
+  opt <- optimbase.set(this=opt,key='x0',value=x0)
+  opt <- optimbase.set(this=opt,key='numberofvariables',value=prod(size(x0)))
+  opt <- optimbase.set(this=opt,key='function',value=fun)
   if (!is.null(xmin))
-    opt <- optimbase.configure(this=opt,key='-boundsmin',value=xmin)
+    opt <- optimbase.set(this=opt,key='boundsmin',value=xmin)
   if (!is.null(xmax))
-    opt <- optimbase.configure(this=opt,key='-boundsmax',value=xmax)
+    opt <- optimbase.set(this=opt,key='boundsmax',value=xmax)
   
   # Check bounds
   hasbounds <- optimbase.hasbounds(this=opt)
@@ -38,7 +38,7 @@ optimbase.gridsearch <- function(fun=NULL,x0=NULL,xmin=NULL,xmax=NULL,
   # Detect number of nonlinear inequality constraints
   neq <- length(opt$fun(x=x0,index=6)$c)
   if (neq>0)
-    opt <- optimbase.configure(this=opt,key='-nbineqconst',value=neq)
+    opt <- optimbase.set(this=opt,key='nbineqconst',value=neq)
   
   # Check x0 is in bounds
   if (optimbase.isfeasible(this=opt,x=x0)$isfeasible==0)
