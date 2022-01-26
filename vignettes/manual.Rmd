@@ -1,0 +1,211 @@
+---
+title: "Introduction to the `optimbase` package"
+author: "Sebastien Bihorel"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{manual}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+`optimbase` is a R port of a module originally developed for Scilab version
+5.2.1 by Michael Baudin (INRIA - DIGITEO). Information about this software can
+be found at [www.scilab.org/](https://www.scilab.org). The following documentation as well as the
+content of the functions .Rd files are adaptations of the documentation provided
+with the original Scilab `optimbase` module.
+
+Currently, `optimbase` does not include all functions distributed with the
+original Scilab module but only those required for the proper operation of the
+`minsearch` function from the `neldermead` package.
+
+# Description
+
+The goal of this package is to provide a building block for a large class of
+specialized optimization methods. This package manages the number of variables,
+the minimum and maximum bounds, the number of non linear inequality constraints,
+the logging system, various termination criteria, the cost function, etc...
+
+The optimization problem to solve is the following:
+$$
+  \begin{array}{l l}
+    min f(x)\\
+    l_i \le{} x_i \le{} h_i, & i = 1,n \\
+    g_i(x) \ge{} 0, & i = 1,nb_{ineq} \\\\
+  \end{array}
+$$
+where $n$ is the number of variables and $nb_{ineq}$ the number of inequality
+constraints. 
+
+# Basic object
+
+The basic object used by the `optimbase` package to store the configuration
+settings and the history of an optimization is a 'optimization' object, i.e. a
+list typically created by `optimbase` and having a strictly defined
+structure (see `?optimbase` for more details).
+
+# The cost function
+
+The `fun` element of the optimization object (thereafter referred to as
+`this`) allows to configure the cost function. The cost function is used,
+depending on the context, to compute the cost, the nonlinear inequality positive
+constraints, the gradient of the function and the gradient of the nonlinear
+inequality constraints. The cost function can also be used to produce outputs
+and to terminate an optimization algorithm. The cost function can also take as
+input/output an additional argument, if the `costfargument` element of
+`this` is configured. It should be defined as follows:
+
+`costf <- function(x, index, fmsfundata)`
+
+where
+
+* `x`: is the current point, as a column matrix,
+* `index`: an integer representing the value to compute:
+    + index = 1: nothing is to be computed, the user may display messages, for example
+    + index = 2: compute `f`
+    + index = 3: compute `g`
+    + index = 4: compute `f` and `g`
+    + index = 5: compute `c`
+    + index = 6: compute `f` and `c`
+    + index = 7: compute `f`, `g`, `c`, and `gc`
+    
+    where `f` is the value of the objective function (a scalar), `g`
+    the gradient of the objective function (a row matrix), `c` the
+    constraints (a row matrix), and `gc` the gradient of the constraints
+    (a matrix),}
+* `fmsfundata`: an user-provided input/output argument.
+
+The cost function must return a list with the following elements: `this`,
+`f`, `g`, `c`, `gc`, `index`. The `index` output parameter has a different 
+meaning than the `index` input argument; it indicates if the evaluation of the 
+cost function was possible:
+
+* index > 0: everything went fine,
+* index = 0: the optimization must stop,
+* index < 0: one function could not be evaluated.
+
+The cost function is typically evaluated at the current point estimate `x`
+by using the following call: `optimbase.function(this, x, index)`.
+
+If the 'type' attribute of `this$costfargument` is **not** 'T_FARGS', the cost 
+function is called within the `optimbase.function` as `this$fun(x=x,index=index)`
+and returns non NULL elements for:
+
+* `f`, and `index`: if `this$withderivatives` is FALSE and `this$nbineqconst`=0 
+(there is no nonlinear constraint),
+* `f`, `c`, and `index`: if `this$withderivatives` is FALSE and `this$nbineqconst`>0
+(there are nonlinear constraints),
+* `f`, `g`, and `index`: if `this$withderivatives` is TRUE and `this$nbineqconst`=0
+(there is no nonlinear constraint),
+* `f`, `g`, `c`, `gc`, and `index`: if `this$withderivatives` is TRUE and 
+`this$nbineqconst`>0 (there are nonlinear constraints).
+
+If the 'type' attribute of `this$costfargument` is 'T\_FARGS',
+the cost function is called within the `optimbase.function` as
+`this$fun(x=x,index=index,fmsfundata=this$costfargument)` and returns non
+NULL elements for:
+
+* `f`, `index`, and `this$costfargument`: if `this$withderivatives` is FALSE and
+`this$nbineqconst=0` (there is no nonlinear constraint),
+* `f`, `c`, `index`, and `this$costfargument`: if `this$withderivatives` is 
+FALSE and `this$nbineqconst`>0 (there are nonlinear constraints),
+* `f`, `g`, `index`, and `this$costfargument`: if `this$withderivatives` is 
+TRUE and `this$nbineqconst`=0 (there is no nonlinear constraint),
+* `f`, `g`, `c`, `gc`, `index`, and `this$costfargument`: if `this$withderivatives`
+is TRUE and `this$nbineqconst`>0 (there are nonlinear constraints).
+
+Each of these cases corresponds to a particular class of algorithms, including
+for example unconstrained, derivative-free algorithms, nonlinearily constrained,
+derivative-free algorithms, unconstrained, derivative-based algorithms,
+nonlinearily constrained, derivative-based algorithms, etc... The current
+package was designed to handle many situations.
+
+# The output function
+
+The `outputcommand` element of the optimization object allows to configure
+a command which is called back at the start of the optimization, at each
+iteration and at the end of the optimization. The output function must be
+defined as follows:
+
+`outputcmd <- function(state, data, myobj)`
+
+where:
+
+* `state`: is a string representing the current state of the algorithm.
+    Possible values are 'init', 'iter', and 'done'.
+* `data`: a list containing at least the following elements:
+    + `x`: the current point estimate,
+    + `fval`: the value of the cost function at the current point estimate,
+    + `iteration`: the current iteration index,
+    + `funccount`: the number of function evaluations.
+* `fmsdata`: a user-defined parameter. This input parameter is defined 
+with the `outputcommandarg` element of the optimization object.
+
+The output function may be used when debugging the specialized optimization
+algorithm, so that a verbose logging is produced. It may also be used to write
+one or several report files in a specialized format (ASCII, LaTeX{}, Excel, 
+etc...). The user-defined parameter may be used in that case to store file
+names or logging options.
+
+The `data` list argument may contain more fields than the current presented
+ones. These additional fields may contain values which are specific to the
+specialized algorithm, such as the simplex in a Nelder-Mead method, the gradient
+of the cost function in a BFGS method, etc...
+
+# Termination
+
+The `optimbase.terminate` function provided with the current package takes
+into account several generic termination criteria. It is recommended that
+specialized termination criteria in specialized optimization algorithms  are
+implemented by calling extra termination criteria function in addition to the
+`optimbase.terminate`, rather than by modification of the function itself.
+
+The `optimbase.terminate` function uses a set of rules to determine
+whether the algorithm should continue or stop. It also updates the termination
+status to one of the following: 'continue', 'maxiter', 'maxfunevals', 'tolf' or
+'tolx'. The set of rules is the following:
+
+* By default, the status is 'continue' and the `terminate` flag is FALSE.
+* The number of iterations is examined and compared to the `maxiter` element of 
+the optimization object: if `iterations` $\ge$  `maxiter`, then the status is 
+set to 'maxiter' and `terminate` is set to TRUE.
+* The number of function evaluations is examined and compared to the `maxfunevals`
+element of the optimization object: if `funevals` $\ge$ `maxfunevals`, then the 
+status is set to 'maxfuneval' and `terminate` is set to TRUE.
+* The tolerance on function value is examined depending on the value of the 
+`tolfunmethod` element of the optimization object:
+    + FALSE: the tolerance on `f` is just skipped.
+    + TRUE: if $|currentfopt| < tolfunrelative \cdot |previousfopt| + tolfunabsolute$,
+    then the status is set to 'tolf' and `terminate` is set to TRUE.
+
+The relative termination criteria on the function value works well if the 
+function value at optimum is near zero. In that case, the function value at
+initial guess `fx0` may be used as `previousfopt`.
+
+The absolute termination criteria on the function value works if the user has 
+an accurate idea of the optimum function value.
+
+* The tolerance on x is examined depending on the value of the `tolxmethod` element
+of the optimization object:
+    + FALSE: the tolerance on `x` is just skipped.
+    + TRUE: if $norm(currentxopt - previousxopt) < tolxrelative \cdot norm(currentxopt) + tolxabsolute$,
+    then the status is set to 'tolx' and `terminate` is set to TRUE.
+    
+The relative termination criteria on `x` works well if `x` at optimum is 
+different from zero. In that case, the condition measures the distance between 
+two iterates.
+
+The absolute termination criteria on `x` works if the user has an accurate idea 
+of the scale of the optimum `x`. If the optimum `x` is near 0, the relative 
+tolerance will not work and the absolute tolerance is more appropriate.
+
+# Network of `optimbase` functions
+
+The network of functions provided in `optimbase` is illustrated in the network
+map given in the `neldermead` package.

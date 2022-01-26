@@ -1,6 +1,7 @@
 exportPattern("^[^\\.]")
 import(methods)
 import(Matrix)
+importFrom("utils", "str")
 S3method(print,optimbase)
 S3method(summary,optimbase)
 S3method(is,optimbase)

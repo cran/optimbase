@@ -1,0 +1,3 @@
+# optimbase
+
+The optimbase provides a set of commands to manage an abstract optimization method. The goal is to provide a building block for a large class of specialized optimization methods. This package manages: the number of variables, the minimum and maximum bounds, the number of non linear inequality constraints, the cost function, the logging system, various termination criteria, etc...

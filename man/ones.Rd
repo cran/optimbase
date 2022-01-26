@@ -30,6 +30,7 @@
   zeros()
   zeros(3)
   ones(4,5)
-  \dontrun{ones('3','3')}
+  # Will fail
+  try(ones('3','3'))
 }
 \keyword{ method }
